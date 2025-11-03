@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Bai01.Models.SACH>
+@{
+    ViewBag.Title = "Tìm kiếm sách";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-success">Kết quả tìm kiếm</h2>
+<hr />
+
+<!-- FORM BỘ LỌC TÌM KIẾM -->
+<form method="get" action="@Url.Action("TimKiem","Home")" class="row g-3 mb-4">
+    <div class="col-md-4">
+        <input type="text" name="keyword" value="@ViewBag.keyword" class="form-control" placeholder="Nhập từ khóa..." />
+    </div>
+
+    <div class="col-md-3">
+        <select name="machude" class="form-select">
+            <option value="">-- Chọn chủ đề --</option>
+            @foreach (var cd in new Bai01.Models.Model1().CHUDEs)
+            {
+                <option value="@cd.MACHUDE" @(ViewBag.machude == cd.MACHUDE ? "selected" : "")>@cd.TENCHUDE</option>
+            }
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <input type="number" name="minPrice" value="@ViewBag.minPrice" class="form-control" placeholder="Giá từ..." />
+    </div>
+
+    <div class="col-md-2">
+        <input type="number" name="maxPrice" value="@ViewBag.maxPrice" class="form-control" placeholder="...đến" />
+    </div>
+
+    <div class="col-md-1 d-grid">
+        <button type="submit" class="btn btn-success">Lọc</button>
+    </div>
+</form>
+
+@if (!Model.Any())
+{
+    <p>Không tìm thấy sản phẩm nào phù hợp.</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var s in Model)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card h-100 shadow-sm">
+                    <img src="~/Content/IMG/@s.ANHBIA" class="card-img-top" alt="@s.TENSACH" style="height: 220px; object-fit: cover;" />
+                    <div class="card-body">
+                        <h5 class="card-title">@s.TENSACH</h5>
+                        <p class="card-text text-muted">@s.MOTA</p>
+                        <p class="text-danger fw-bold">@string.Format("{0:N0} đ", s.GIABAN)</p>
+                        <a href="@Url.Action("ChiTietSach","Home", new { id = s.MASACH })" class="btn btn-outline-success w-100">
+                            Xem chi tiết
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

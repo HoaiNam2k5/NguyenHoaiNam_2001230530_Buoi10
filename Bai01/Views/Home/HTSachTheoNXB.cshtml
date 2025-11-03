@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Bai01.Models.SACH>
+
+@{
+    ViewBag.Title = "Sách theo Nhà Xuất Bản";
+}
+
+<h2 class="text-success">Sách thuộc nhà xuất bản: @ViewBag.tennxb</h2>
+<hr />
+
+@if (!Model.Any())
+{
+    <p>Hiện chưa có sách nào trong nhà xuất bản này.</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var s in Model)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card h-100 shadow-sm">
+                    <img src="~/Content/IMG/@s.ANHBIA" class="card-img-top" alt="@s.TENSACH" style="height: 220px; object-fit: cover;" />
+                    <div class="card-body">
+                        <h5 class="card-title">@s.TENSACH</h5>
+                        <p class="card-text text-muted">@s.MOTA</p>
+                        <p class="text-danger fw-bold">@string.Format("{0:N0} đ", s.GIABAN)</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Bai01.Models.CHUDE>
+
+<ul class="nav flex-column">
+    @foreach (var cHUDE in Model)
+    {
+    <li class="nav-item border">
+        @Html.ActionLink(cHUDE.TENCHUDE, "HTSachTheoChuDe", "Home", new { id = cHUDE.MACHUDE }, new { @class = "nav-link" })
+    </li>
+    }
+</ul>

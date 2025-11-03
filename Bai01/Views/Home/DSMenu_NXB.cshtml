@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Bai01.Models.NHAXUATBAN>
+
+<ul class="nav flex-column">
+    @foreach (var nHAXUATBAN in Model)
+    {
+        <li class="nav-item border">
+            @Html.ActionLink(nHAXUATBAN.TENNXB, "HTSachTheoNXB", "Home", new { id = nHAXUATBAN.MANXB}, new { @class = "nav-link" })
+        </li>
+    }
+</ul>

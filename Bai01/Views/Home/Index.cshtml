@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Bai01.Models.SACH>
+<body class="bg-light">
+
+    <div class="container py-5">
+        <h2 class="text-center mb-4">Danh sách Sách</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var sACH in Model)
+            {
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img style=" width: 100%; height: 100%; object-fit: cover;" src="~/Content/IMG/@sACH.ANHBIA" class="card-img-top">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@sACH.TENSACH</h5>
+                        <p class="text-muted mb-1">@sACH.MANXB</p>
+                        <p class="text-danger fw-bold">@string.Format("{0:N0} đ", sACH.GIABAN)</p>
+                        <p class="card-text small">@sACH.MOTA</p>
+                    </div>
+                    <div class="card-footer text-center bg-white">
+                        <a href="@Url.Action("ChiTietSach", "Home", new { id = sACH.MASACH })" class="btn btn-outline-primary btn-sm">
+                            Xem chi tiết
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+            }
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+

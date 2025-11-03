@@ -1,0 +1,57 @@
+﻿
+@model Bai01.Models.KHACHHANG
+@{
+    ViewBag.Title = "Đăng ký tài khoản";
+}
+
+<div class="container mt-4">
+    <h2 class="text-success mb-3">Đăng ký tài khoản</h2>
+    <hr />
+    @if (ViewBag.ThongBao != null)
+    {
+        <div class="alert alert-info">@ViewBag.ThongBao</div>
+    }
+
+    @using (Html.BeginForm("DangKy", "TaiKhoan", FormMethod.Post))
+    {
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label>Họ tên</label>
+                    @Html.TextBoxFor(m => m.HOTEN, new { @class = "form-control" })
+                </div>
+                <div class="mb-3">
+                    <label>Ngày sinh</label>
+                    @Html.TextBoxFor(m => m.NGAYSINH, new { @class = "form-control", type = "date" })
+                </div>
+                <div class="mb-3">
+                    <label>Giới tính</label>
+                    @Html.TextBoxFor(m => m.GIOITINH, new { @class = "form-control" })
+                </div>
+                <div class="mb-3">
+                    <label>Địa chỉ</label>
+                    @Html.TextBoxFor(m => m.DIACHI, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label>Tên đăng nhập</label>
+                    @Html.TextBoxFor(m => m.TAIKHOAN, new { @class = "form-control" })
+                </div>
+                <div class="mb-3">
+                    <label>Mật khẩu</label>
+                    @Html.PasswordFor(m => m.MATKHAU, new { @class = "form-control" })
+                </div>
+                <div class="mb-3">
+                    <label>Email</label>
+                    @Html.TextBoxFor(m => m.EMAIL, new { @class = "form-control" })
+                </div>
+                <div class="mb-3">
+                    <label>Điện thoại</label>
+                    @Html.TextBoxFor(m => m.DIENTHOAI, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success">Đăng ký</button>
+    }
+</div>
