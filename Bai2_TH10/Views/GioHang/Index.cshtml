@@ -1,0 +1,60 @@
+﻿@model Bai2_TH10.Models.GioHang
+@{
+    ViewBag.Title = "Giỏ hàng";
+}
+
+<h2>Giỏ hàng</h2>
+
+@if (Model.Items.Count == 0)
+{
+    <p>Giỏ hàng trống. <a href="@Url.Action("Index","Home")">Mua hàng ngay</a></p>
+}
+else
+{
+    <form action="@Url.Action("CapNhat","GioHang")" method="post">
+        <table class="table table-bordered text-center align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Hình ảnh</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                    <th>Chi tiết</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td><img src="~/IMG/@item.HinhAnh" width="100" /></td>
+                        <td>@item.TenSP</td>
+                        <td>@String.Format("{0:0,0 VNĐ}", item.DonGia)</td>
+                        <td>
+                            <form action="@Url.Action("CapNhat","GioHang")" method="post" class="d-inline">
+                                <input type="hidden" name="maSP" value="@item.MaSP" />
+                                <input type="number" name="soLuong" value="@item.SoLuong" min="1" class="form-control d-inline w-50" />
+                                <button type="submit" class="btn btn-primary btn-sm">Cập nhật</button>
+                            </form>
+                        </td>
+                        <td>@String.Format("{0:0,0 VNĐ}", item.ThanhTien)</td>
+                        <td>
+                            <a href="@Url.Action("ChiTietSP","Home", new { id = item.MaSP })" class="btn btn-info btn-sm">Xem chi tiết</a>
+                        <td>
+                            <a href="@Url.Action("XoaKhoiGio","GioHang", new { maSP = item.MaSP })" class="btn btn-danger btn-sm"
+                               onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');">Xóa</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </form>
+
+    <div class="text-right">
+        <h4>Tổng tiền: @String.Format("{0:0,0 VNĐ}", Model.TongTien())</h4>
+        <a href="@Url.Action("XoaGio","GioHang")" class="btn btn-warning"
+           onclick="return confirm('Bạn có chắc muốn xóa toàn bộ giỏ hàng?');">Xóa giỏ hàng</a>
+        <a href="@Url.Action("Index","Home")" class="btn btn-success">Tiếp tục mua hàng</a>
+    </div>
+}

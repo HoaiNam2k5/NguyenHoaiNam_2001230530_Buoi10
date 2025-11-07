@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Đăng nhập";
+}
+
+<div class="container mt-4">
+    <h2 class="text-success mb-3">Đăng nhập</h2>
+    <hr />
+    @if (ViewBag.ThongBao != null)
+    {
+        <div class="alert alert-danger">@ViewBag.ThongBao</div>
+    }
+
+    @using (Html.BeginForm("DangNhap", "TaiKhoan", FormMethod.Post))
+    {
+        <div class="mb-3">
+            <label>Tên đăng nhập</label>
+            <input type="text" name="tendn" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label>Mật khẩu</label>
+            <input type="password" name="matkhau" class="form-control" required />
+        </div>
+        <button type="submit" class="btn btn-success">Đăng nhập</button>
+      
+    }
+</div>

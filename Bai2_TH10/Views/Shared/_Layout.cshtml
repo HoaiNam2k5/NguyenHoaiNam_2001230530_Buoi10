@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+            <i class="bg-secondary bi bi-book"></i>
+            @Html.ActionLink("Nhà sách bách khoa", "Index", "Home", new { area = "" }, new { @class = "navbar-brand fw-bold" })
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                    aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        @Html.ActionLink("Trang Chủ", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Liên hệ", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Giới thiệu", "About", "Home", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Admin", "Index", "Admin", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                </ul>
+
+
+                <form class="d-flex me-3" role="search" method="get" action="@Url.Action("Index","Home")">
+                    <input class="form-control me-2" type="search" placeholder="Tìm kiếm sách..." aria-label="Search" name="keyword">
+                    <button class="btn btn-light" type="submit"><i class="bi bi-search"></i></button>
+                </form>
+
+
+            </div>
+
+
+        </div>
+        <div class="nav-item m-2">
+          
+            @if (Session["TaiKhoan"] != null)
+            {
+                var kh = (Bai2_TH10.Models.tbl_KhachHang)Session["TaiKhoan"];
+                <span class="text-white me-2">Xin chào, @kh.TenKH!</span>
+                @Html.ActionLink("Đăng xuất", "DangXuat", "TaiKhoan", null, new { @class = "btn btn-light btn-sm" })
+            }
+            else
+            {
+                @Html.ActionLink("Đăng nhập", "DangNhap", "TaiKhoan", null, new { @class = "btn btn-light btn-sm me-2" })
+
+
+            }
+           
+        </div>
+        <div class="nav-item m-1 text-white">
+            @Html.Action("GioHangPartial", "GioHang")
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

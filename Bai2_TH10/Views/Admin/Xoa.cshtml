@@ -1,0 +1,14 @@
+﻿@model Bai2_TH10.Models.tbl_SanPham
+@{
+    ViewBag.Title = "Xóa sản phẩm";
+}
+
+<h3>Bạn có chắc muốn xóa sản phẩm "@Model.TenSP"?</h3>
+
+@using (Html.BeginForm("Xoa", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.MaSP)
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">Hủy</a>
+}

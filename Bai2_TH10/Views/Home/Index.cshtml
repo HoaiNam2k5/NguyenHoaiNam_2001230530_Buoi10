@@ -1,0 +1,33 @@
+﻿<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+@model IEnumerable<Bai2_TH10.Models.tbl_SanPham>
+<body class="bg-light">
+
+    <div class="container py-5">
+        <h2 class="text-center mb-4">Danh sách Sản Phẩm</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var sanPham in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <img style=" width: 100%; height: 100%; object-fit: cover;" src="~/IMG/@sanPham.HinhAnh" class="card-img-top">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">@sanPham.TenSP</h5>
+                            <p class="text-danger fw-bold">@string.Format("{0:N0} đ", sanPham.DonGia)</p>
+                            <p class="card-text small">@sanPham.MoTa</p>
+                        </div>
+                        <div class="card-footer text-center bg-success">
+                            <a href="@Url.Action("ThemGio", "GioHang", new { maSP = sanPham.MaSP})" class="btn btn-success">
+                                Chọn mua
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
